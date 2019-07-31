@@ -1,0 +1,35 @@
+<h1>
+    <span style="color: red;font-size:larger">
+        I am Parent Component behaving as a parent for the @output and Event emitter :)
+    </span>
+    <!-- UserName{{userName}} -->
+</h1>
+<div style="width: 100%;background-color: cornflowerblue">
+    <h2 style="color: white">
+        Welcome {{userNameFromChild}}
+    </h2>
+    <table border="1px" *ngIf="userNameList">
+        <tr style="background-color: gray;font-weight: bold;color: white;text-align: center">
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Email</td>
+            <td>Phone Number</td>
+            <td>gender</td>
+            <td>CountryId</td>
+            <td>Action</td>
+        </tr>
+        <tr *ngFor="let user of userNameList">
+            <td style="padding:10px">{{ user.FirstName }}</td>
+            <td style="padding:10px">{{ user.LastName }}</td>
+            <td style="padding:10px">{{ user.Email }}</td>
+            <td style="padding:10px">{{ user.PhoneNumber }}</td>
+            <td style="padding:10px">{{ user.Gender }}</td>
+            <td style="padding:10px">{{ user.CountryId }}</td>
+            <td style="padding:10px"><button type="button" class="btn btn-primary"
+                    (click)="editUserModel(user)">Edit</button> &nbsp;</td>
+        </tr>
+    </table>
+</div>
+
+<!-- <app-login (login)="onLogin($event)"></app-login> -->
+<app-login (users)="OnLoginUsers($event)" (login)="onLogin($event)"></app-login>

@@ -1,0 +1,258 @@
+<!-- <div class="row justify-content-center">
+    <div class="col-md-12">
+        <div class="card">
+            <header class="card-header">
+                <a href="" class="float-right btn btn-outline-primary mt-1">Log in</a>
+                <h4 class="card-title mt-2">Sign up</h4>
+            </header>
+            <article class="card-body">
+                <form>
+                    <div class="form-row">
+                        <mat-form-field class="example-full-width col form-group">
+                            <input matInput placeholder="First Name" value="">
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width col form-group">
+                            <input matInput placeholder="Last Name" value="">
+                        </mat-form-field>
+
+                    </div>
+                    <div class="form-row">
+                        <mat-form-field class="example-full-width col form-group">
+                            <input matInput placeholder="Email Address" value="">
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-radio-group aria-label="Select an option">
+                            <mat-radio-button value="1">Male</mat-radio-button>
+                            <mat-radio-button value="2">Female</mat-radio-button>
+                            <mat-radio-button value="3">Transcend</mat-radio-button>
+                        </mat-radio-group>
+                       
+                    </div> 
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <mat-form-field class="example-full-width col form-group">
+                                <input matInput placeholder="City" value="">
+                            </mat-form-field>
+                        </div> 
+                        <div class="form-group col-md-6">
+                            <mat-form-field>
+                                <mat-label>Country</mat-label>
+                                <mat-select>
+                                    <mat-option>
+                                        India
+                                    </mat-option>
+                                    <mat-option>
+                                        UK
+                                    </mat-option>
+                                    <mat-option>
+                                        Bulgaria
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width col form-group">
+                            <input matInput placeholder="Password" value="" type="password" maxlength="4">
+                        </mat-form-field>
+                        <mat-form-field>
+                                <input matInput [matDatepicker]="picker" placeholder="Choose a date of birth" formControlName="dateOfBirth" id="dateOfBirth" 
+                                    readonly (click)="picker.open()">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
+                    </div> 
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Register </button>
+                    </div> 
+                    <mat-checkbox></mat-checkbox><small class="text-muted"> By clicking the 'Sign Up' button, you
+                        confirm that you accept our <br>
+                        Terms of use and Privacy Policy.</small>
+                </form>
+            </article> 
+        </div> 
+    </div> 
+
+</div> -->
+
+
+
+<div class="container">
+
+    <h2>Registration List</h2> <div *ngIf="dataSaved">{{message}}</div>
+    <button mat-raised-button color="primary" data-dismiss="modal" aria-label="Close" value="Add User"
+    data-toggle="modal" (click)="addUserModal()">Select</button>
+    <table border="1px" *ngIf="users">
+        <tr style="background-color: gray;font-weight: bold;color: white;text-align: center">
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Email</td>
+            <td>Phone Number</td>
+            <td>gender</td>
+            <td>CountryId</td>
+            <td>Action</td>
+        </tr>
+        <tr *ngFor="let user of users">
+            <td style="padding:10px">{{ user.FirstName }}</td>
+            <td style="padding:10px">{{ user.LastName }}</td>
+            <td style="padding:10px">{{ user.Email }}</td>
+            <td style="padding:10px">{{ user.PhoneNumber }}</td>
+            <td style="padding:10px">{{ user.Gender }}</td>
+            <td style="padding:10px">{{ user.CountryId }}</td>
+            <td style="padding:10px"><button type="button" class="btn btn-primary" (click)="editUserModel(user)">Edit</button> &nbsp;</td>
+        </tr>
+    </table>
+   
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add User Details</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <label class="col-sm-2 control-label">First Name</label>
+                        <div class="col-sm-4">
+                            <!-- <mat-form-field class="example-full-width col form-group">
+                                <input matInput type="text" id="firstName" placeholder="First Name"  formControlName="firstName" >
+                                <mat-error *ngIf="hasError('firstName', 'required')">Name is required</mat-error>
+                            </mat-form-field> -->
+                            <input type="text" id="firstName" formControlName="firstName" [(ngModel)]="firstName"
+                                [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" placeholder="First Name"
+                                class="form-control" autofocus>
+                            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                            </div>
+                        </div>
+                        <label [ngClass]="{'is-invalid':submitted && f.lastName.errors}" class="col-sm-2 control-label">Last
+                            Name</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="lastName" formControlName="lastName"
+                                [ngClass]="{'is-invalid':submitted && f.lastName.errors}" placeholder="Last Name"
+                                class="form-control" autofocus>
+                            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                <div *ngIf="f.firstName.errors.required">Last Name is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="email" class="col-sm-2 control-label">Email* </label>
+                        <div class="col-sm-4">
+                            <input type="email" id="email" formControlName="email"
+                                [ngClass]="{'is-invalid':submitted && f.email.errors}" placeholder="Email" class="form-control"
+                                name="email">
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                <div *ngIf="f.email.errors.required">email is required</div>
+                                <div *ngIf="f.email.errors.email">email is not valid</div>
+                            </div>
+                        </div>
+                        <label for="phoneNumber" class="col-sm-2 control-label">Phone number </label>
+                        <div class="col-sm-4">
+                            <input type="text" formControlName="phoneNumber"
+                                [ngClass]="{'is-invalid':submitted && f.phoneNumber.errors}" id="phoneNumber"
+                                placeholder="Phone number" class="form-control">
+                            <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+                                <div *ngIf="f.phoneNumber.errors.required">phone is required</div>
+                                <div *ngIf="f.phoneNumber.errors.pattern">phone is not valid</div>
+                                <div *ngIf="f.phoneNumber.errors.maxlength">Max 10 character</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="password" class="col-sm-2 control-label">Password*</label>
+                        <div class="col-sm-4">
+                            <input type="password" id="password" formControlName="password"
+                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password"
+                                class="form-control">
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                <div *ngIf="f.password.errors.required">Password is required</div>
+                                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                            </div>
+                        </div>
+                        <label for="password" class="col-sm-2 control-label">Confirm Password*</label>
+                        <div class="col-sm-4">
+                            <input type="password" id="password" formControlName="confirmPassword"
+                                [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" placeholder="Password"
+                                class="form-control">
+                            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                                <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                                <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="birthDate" class="col-sm-2 control-label">Date of Birth*</label>
+                        <div class="col-sm-4">
+                            <input type="date" id="birthDate" formControlName="dob"
+                                [ngClass]="{'is-invalid':submitted && f.dob.errors}" class="form-control">
+                            <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                                <div *ngIf="f.dob.errors.required">DOB is required</div>
+                            </div>
+                        </div>
+                        <label class="control-label col-sm-2">Gender</label>
+                        <div class="col-sm-4">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label class="radio-inline">
+                                        <input type="radio" id="femaleRadio" name="gender" formControlName="gender"
+                                            value="Female">Female
+                                    </label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="radio-inline">
+                                        <input type="radio" id="maleRadio" name="gender" formControlName="gender" value="Male">Male
+                                    </label>
+                                    <!-- <div *ngIf="submitted && f.gender.errors?.required" class="invalid-feedback">
+                                        gender is required
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="country" class="col-sm-2 control-label">Country</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" formControlName="countryId" 
+                                [ngClass]="{'is-invalid':submitted && f.country.errors}">
+                                <option value="0">--Select--</option>
+                                <option *ngFor="let country of countries" value={{country.Id}}>
+                                    {{country.Name}}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted && f.country.errors" class="invalid-feedback">country is required</div>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="checkbox" formControlName="Terms" id="Terms" class="form-check-input"
+                                [ngClass]="{ 'is-invalid': submitted && f.Terms.errors }" />
+                            <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+                            <div *ngIf="submitted && f.Terms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+                        </div>
+                    </div>
+                   
+            
+                </form>
+            </div>
+           
+
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="onSubmit()">Register</button> &nbsp;
+                    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button mat-raised-button color="primary">Save changes</button> -->
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+</div> <!-- ./container -->

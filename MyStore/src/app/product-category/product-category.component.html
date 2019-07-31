@@ -1,0 +1,11 @@
+<h3>product-category </h3>
+
+<table border="1px" *ngIf="productCategory" >
+        <tr style="background-color: gray;font-weight: bold;color: white">
+            <td>Name</td>
+        </tr>
+      <tr  *ngFor="let productCat of productCategory">
+          <td style="padding:10px">{{ productCat.Name }}</td>
+      </tr>
+      
+      </table> 

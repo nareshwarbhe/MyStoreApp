@@ -1,0 +1,80 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <span style="color: white; vertical-align: middle">My Store</span>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <p>
+        <!-- <a routerLink="/About">About</a> -->
+        <a mat-raised-button  routerLink="/About">About</a>
+      </p>
+      <p>
+        <!-- <a routerLink="/Contact">Contact</a> -->
+        <a mat-raised-button color="warn" routerLink="/Contact">Contact</a>
+      </p>
+      <p>
+        <!-- <a routerLink="/Products">Product</a> -->
+        <a mat-raised-button color="primary" routerLink="/Products">Product</a>
+      </p>
+      <p>
+        <!-- <a routerLink="/Category">Product Categories</a> -->
+        <a mat-raised-button color="accent" routerLink="/Category">Product Categories</a>
+      </p>
+      <p>
+        <!-- <a routerLink="/Category">Product Categories</a> -->
+        <a mat-raised-button color="accent" routerLink="/User">User Registration</a>
+      </p>
+      <p>
+        <!-- <a routerLink="/Category">Product Categories</a> -->
+        <a mat-raised-button color="accent" routerLink="/Header">User Registration</a>
+      </p>
+     
+      <!-- <div class="example-button-row">
+          <button mat-raised-button>Basic</button>
+          <button mat-raised-button color="primary">Primary</button>
+          <button mat-raised-button color="accent">Accent</button>
+          <button mat-raised-button color="warn">Warn</button>
+          <button mat-raised-button disabled>Disabled</button>
+          <a mat-raised-button routerLink=".">Link</a>
+        </div> -->
+    </div>
+    
+    <app-loader></app-loader>
+    <div class="col-sm-8 text-left">
+      <app-header></app-header>
+      <!-- {{showLoadingIndicator}} -->
+      <router-outlet></router-outlet>
+    </div>
+   
+    <div class="col-sm-2 sidenav">
+      <div class="well">
+        <p><img src="../assets/Images/prd1.jfif" width="150px" height="150px"></p>
+      </div>
+      <div class="well">
+        <p><img src="../assets/Images/prd2.jfif" width="150px" height="150px"></p>
+      </div>
+
+
+    </div>
+  </div>
+</div>

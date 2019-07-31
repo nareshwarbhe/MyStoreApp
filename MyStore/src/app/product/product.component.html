@@ -1,0 +1,106 @@
+<h4>Products</h4>
+
+<table border="1px" *ngIf="products">
+    <tr style="background-color: gray;font-weight: bold;color: white;text-align: center">
+        <td>Name</td>
+        <td>Number</td>
+        <td>Price</td>
+        <td>Category</td>
+        <td>SubCategory</td>
+        <td>Model</td>
+        <td>Photo</td>
+        <td>Actions</td>
+    </tr>
+    <tr *ngFor="let product of products | filter:filter| paginate: { itemsPerPage: 3, currentPage: p };let i = index">
+        <td style="padding:10px">{{ product.ProductName }}</td>
+        <td style="padding:10px">{{ product.ProductNumber }}</td>
+        <td style="padding:10px">{{ product.ProductListPrice }}</td>
+        <td style="padding:10px">{{ product.ProductCategoryName }}</td>
+        <td style="padding:10px">{{ product.ProductSubCategoryName }}</td>
+        <td style="padding:10px">{{ product.ProductModelName }}</td>
+        <td style="padding:10px"><img src="data:image/jpeg;base64,{{product.ProductPhoto}}" id="photo-id" /></td>
+        <!-- <td>{{ product.ProductDescription }}</td> -->
+        <td>
+            <button mat-raised-button color="primary" data-dismiss="modal" aria-label="Close" value="Select"
+                data-toggle="modal" (click)="showModal(product)">Select</button>
+            <!-- <input type="button" class="btn btn-primary" value="Select" data-toggle="modal" (click)="showModal(product)"/>  -->
+
+        </td>
+
+    </tr>
+
+</table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>Product Name- {{productName}}</div>
+                <div>Product Number- {{productNumber}}</div>
+                <div>Product Modal- {{productModalName}}</div>
+            </div>
+            <div>
+                <fieldset>
+                    <legend>Angular Material Samples</legend>
+                    
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Favorite food" value="Sushi">
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <textarea matInput placeholder="Leave a comment"></textarea>
+                        </mat-form-field>
+
+                    
+                        <mat-checkbox>Check me!</mat-checkbox>
+                        <mat-radio-group aria-label="Select an option">
+                            <mat-radio-button value="1">Option 1</mat-radio-button>
+                            <mat-radio-button value="2">Option 2</mat-radio-button>
+                        </mat-radio-group>
+                    
+                        <h4>Basic mat-select</h4>
+                        <mat-form-field>
+                            <mat-label>Favorite food</mat-label>
+                            <mat-select>
+                                <mat-option *ngFor="let food of foods" [value]="food.value">
+                                    {{food.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <h4>Basic native select</h4>
+                        <mat-form-field>
+                            <mat-label>Cars</mat-label>
+                            <select matNativeControl required>
+                                <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                                <option value="mercedes">Mercedes</option>
+                                <option value="audi">Audi</option>
+                            </select>
+                        </mat-form-field>
+                    
+                        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                        </mat-paginator>
+                    
+                </fieldset>
+            </div>
+
+            <div class="modal-footer">
+
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button mat-raised-button color="primary">Save changes</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
